@@ -19,7 +19,7 @@ Library is used to to run programs written in 6502 machine language,
 programs that are using Pokey chip to play tunes and sounds.
 
 %description -l pl
-Biblioteka SAP to programowa emulacja procesora 6502 oraz uk³ado
+Biblioteka SAP to programowa emulacja procesora 6502 oraz uk³adu
 Pokey. Te dwa uk³ady by³y u¿ywane w komputerach Atari XL/XE.
 Biblioteka SAP s³u¿y do uruchamiania napisanych w jêzyku maszynowym
 6502 programów, które u¿ywaj± uk³adu Pokey do odtwarzania muzyki i
