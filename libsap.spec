@@ -2,7 +2,7 @@ Summary:	Emulation library of CPU 6502 and Pokey chip used in Atari XL/XE
 Summary(pl):	Biblioteka emulacji procesora 6502 i uk³adu Pokey z Atari XL/XE
 Name:		libsap
 Version:	1.51.1
-Release:	4
+Release:	5
 License:	Freeware
 Group:		Libraries
 Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
@@ -55,7 +55,8 @@ Statyczna biblioteka libsap.
 
 %build
 %{__make} libsap.la \
-	CC="%{__cxx}" OPTS="%{rpmcflags}"
+	CC="%{__cxx}" \
+	OPTS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -76,9 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/libsap.h
-%{_libdir}/libsap.la
 %attr(755,root,root) %{_libdir}/libsap.so
+%{_libdir}/libsap.la
+%{_includedir}/libsap.h
 
 %files static
 %defattr(644,root,root,755)
