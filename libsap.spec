@@ -6,6 +6,7 @@ Release:	4
 License:	Freeware
 Group:		Libraries
 Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
+# Source0-md5:	d3fd5419ec9665ef9d420b12890458d4
 Patch0:		%{name}-shared.patch
 URL:		http://kunik.republika.pl/sap/
 BuildRequires:	libtool
