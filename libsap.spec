@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/libsap.h
-%attr(755,root,root) %{_libdir}/libsap.la
+%{_libdir}/libsap.la
 %attr(755,root,root) %{_libdir}/libsap.so
 
 %files static
