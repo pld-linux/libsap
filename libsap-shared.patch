@@ -13,7 +13,7 @@
 -$(OBJECTS): %.o: %.cpp
 -	$(CC) $(OPTS) -o $@ -c $<
 +$(OBJECTS): %.lo: %.cpp
-+	libtool $(CC) $(OPTS) -o $@ -c $<
++	libtool --mode=compile $(CC) $(OPTS) -o $@ -c $<
  
 -libsap.a: $(OBJECTS)
 -	$(AR) rc $@ $(OBJECTS)
@@ -21,7 +21,7 @@
 -libsap.so: $(OBJECTS)
 -	$(CC) $(OBJECTS) -shared -o $@
 +libsap.la: $(OBJECTS)
-+	libtool $(CC) $(OBJECTS) -o $@ -rpath /usr/lib -version-info 1:51
++	libtool --mode=link $(CC) $(OBJECTS) -o $@ -rpath $(libdir) -version-info 1:51
  
  clean:
  	rm -f $(OBJECTS) libsap.so libsap.a
@@ -31,7 +31,7 @@
 -	if [ -f libsap.a ]; then install -Dm755 libsap.a /usr/local/lib/libsap.a; fi
 -	if [ -f libsap.so ]; then install -Dm755 libsap.so /usr/local/lib/libsap.so; fi
 +	install -Dm644 libsap.h $(DESTDIR)/usr/include/libsap.h
-+	libtool install -D libsap.la $(DESTDIR)/usr/lib/libsap.la
++	libtool --mode=install install -D libsap.la $(DESTDIR)$(libdir)/libsap.la
  
  uninstall:
  	rm -f /usr/local/include/libsap.h /usr/local/lib/libsap.a /usr/local/lib/libsap.so
