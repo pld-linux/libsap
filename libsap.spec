@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka emulacji procesora 6502 i uk³adu Pokey z Atari XL/XE
 Name:		libsap
 Version:	1.51.1
 Release:	3
-License:	freeware
+License:	Freeware
 Group:		Libraries
 Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
