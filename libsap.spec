@@ -2,18 +2,21 @@ Summary:	Emulation library of CPU 6502 and Pokey chip used in Atari XL/XE
 Summary(pl):	Biblioteka emulacji procesora 6502 i ukЁadu Pokey z Atari XL/XE
 Name:		libsap
 Version:	1.51.1
-Release:	2
+Release:	3
 License:	freeware
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
+Group:		Libraries
+Group(de):	Bibliotheken
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt):	Bibliotecas
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
+Patch0:		%{name}-shared.patch
 URL:		http://kunik.republika.pl/sap/
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,27 +32,79 @@ Biblioteka SAP sЁu©y do uruchamiania napisanych w jЙzyku maszynowym
 6502 programСw, ktСre u©ywaj╠ ukЁadu Pokey do odtwarzania muzyki i
 d╪wiЙkСw.
 
+%package devel
+Summary:	Header files for libsap
+Summary(pl):	Pliki nagЁСwkowe libsap
+Group:		Development/Libraries
+Group(de):	Entwicklung/Bibliotheken
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name} = %{version}
+
+%description devel
+Header files for libsap.
+
+%description devel -l pl
+Pliki nagЁСwkowe libsap.
+
+%package static
+Summary:	Static libsap library
+Summary(pl):	Statyczna biblioteka libsap
+Group:		Development/Libraries
+Group(de):	Entwicklung/Bibliotheken
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name}-devel = %{version}
+
+%description static
+Static libsap library.
+
+%description static -l pl
+Statyczna biblioteka libsap.
+
 %prep
 %setup -q
+%patch -p1
 
 %build
-%{__make} static \
+%{__make} libsap.la \
 	CC="%{__cc}" OPTS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
 
-install libsap.a $RPM_BUILD_ROOT%{_libdir}
-install libsap.h $RPM_BUILD_ROOT%{_includedir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9nf README LICENSE
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc *.gz pokey.png
-%{_libdir}/libsap.a
+%attr(755,root,root) %{_libdir}/libsap.so.*.*
+
+%files devel
+%defattr(644,root,root,755)
 %{_includedir}/libsap.h
+%attr(755,root,root) %{_libdir}/libsap.la
+%attr(755,root,root) %{_libdir}/libsap.so
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libsap.a
