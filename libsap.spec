@@ -54,7 +54,7 @@ Statyczna biblioteka libsap.
 
 %build
 %{__make} libsap.la \
-	CC="%{__cc}" OPTS="%{rpmcflags}"
+	CC="%{__cxx}" OPTS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
