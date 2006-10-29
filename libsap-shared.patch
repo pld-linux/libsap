@@ -13,7 +13,7 @@
 -$(OBJECTS): %.o: %.cpp
 -	$(CC) $(OPTS) -o $@ -c $<
 +$(OBJECTS): %.lo: %.cpp
-+	libtool --mode=compile $(CC) $(OPTS) -o $@ -c $<
++	libtool --mode=compile --tag=CXX $(CC) -fPIC $(OPTS) -o $@ -c $<
  
 -libsap.a: $(OBJECTS)
 -	$(AR) rc $@ $(OBJECTS)
@@ -21,7 +21,7 @@
 -libsap.so: $(OBJECTS)
 -	$(CC) $(OBJECTS) -shared -o $@
 +libsap.la: $(OBJECTS)
-+	libtool --mode=link $(CC) $(OBJECTS) -o $@ -rpath $(libdir) -version-info 1:51
++	libtool --mode=link --tag=CXX $(CC) $(OBJECTS) -o $@ -rpath $(libdir) -version-info 1:54:0
  
  clean:
  	rm -f $(OBJECTS) libsap.so libsap.a
