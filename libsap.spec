@@ -1,16 +1,21 @@
 Summary:	Emulation library of CPU 6502 and Pokey chip used in Atari XL/XE
 Summary(pl):	Biblioteka emulacji procesora 6502 i uk³adu Pokey z Atari XL/XE
 Name:		libsap
-Version:	1.51.1
-Release:	6
+Version:	1.54.1
+Release:	1
 License:	Freeware
 Group:		Libraries
-Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
-# Source0-md5:	d3fd5419ec9665ef9d420b12890458d4
-Patch0:		%{name}-shared.patch
+#Source0:	http://kunik.republika.pl/sap/dl/%{name}-%{version}.tar.gz
+Source0:	http://asma.atari.org/bin/sapsrc.zip
+# Source0-md5:	11a365228b2a88f6c47174c1c693e04e
+Patch0:		%{name}-linux.patch
+Patch1:		%{name}-shared.patch
+Patch2:		%{name}-warnings.patch
+Patch3:		%{name}-c.patch
 URL:		http://kunik.republika.pl/sap/
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,6 +36,7 @@ Summary:	Header files for libsap
 Summary(pl):	Pliki nag³ówkowe libsap
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
 
 %description devel
 Header files for libsap.
@@ -51,8 +57,14 @@ Static libsap library.
 Statyczna biblioteka libsap.
 
 %prep
-%setup -q
+%setup -q -n sap.src
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+
+mv -f sapLib.h libsap.h
+ln -sf libsap.h sapLib.h
 
 %build
 %{__make} libsap.la \
@@ -75,8 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README LICENSE pokey.png
-%attr(755,root,root) %{_libdir}/libsap.so.*.*
+%doc README legal.txt pokey.png
+%attr(755,root,root) %{_libdir}/libsap.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
