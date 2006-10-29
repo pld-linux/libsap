@@ -1,0 +1,97 @@
+--- sap.src/Makefile.linux	Sun May 25 23:31:39 2003
++++ sap.src/Makefile	Sun May 25 23:32:00 2003
+@@ -0,0 +1,37 @@
++OBJECTS= sapCpu.o sapPokey.o pokey0.o pokey1.o sapEngine.o
++OPTS=-O2 
++AR=ar
++
++all:
++	@echo -e "Linux port of SAP Library ver.1.54 by Adam Bienias"
++	@echo -e "\ncompilation:"
++	@echo -e "\ttype 'make static' to build static library"
++	@echo -e "\tor   'make dynamic' to build dynamic library"
++	@echo -e "\ninstallation:"
++	@echo -e "\ttype 'make install'"
++	@echo -e "\nuninstallation:"
++	@echo -e "\ttype 'make uninstall'\n"
++
++static: libsap.a
++
++dynamic: libsap.so
++
++$(OBJECTS): %.o: %.cpp
++	$(CC) $(OPTS) -o $@ -c $<
++
++libsap.a: $(OBJECTS)
++	$(AR) rc $@ $(OBJECTS)
++
++libsap.so: $(OBJECTS)
++	$(CC) $(OBJECTS) -shared -o $@
++
++clean:
++	rm -f $(OBJECTS) libsap.so libsap.a
++
++install:
++	install -Dm644 libsap.h /usr/local/include/libsap.h
++	if [ -f libsap.a ]; then install -Dm755 libsap.a /usr/local/lib/libsap.a; fi
++	if [ -f libsap.so ]; then install -Dm755 libsap.so /usr/local/lib/libsap.so; fi
++
++uninstall:
++	rm -f /usr/local/include/libsap.h /usr/local/lib/libsap.a /usr/local/lib/libsap.so
+--- sap.src/README.linux	Sun May 25 23:31:39 2003
++++ sap.src/README	Sun May 25 23:31:39 2003
+@@ -0,0 +1,6 @@
++This is a Linux port ver.1.54.1 of SAP Library ver.1.54 by Adam Bienias.
++
++SAP Library is a software emulation of CPU 6502 microprocessor and Pokey chip.
++Those two chips are used in Atari XL/XE computers. SAP Library is used to to 
++run programs written in 6502 machine language, programs that are using Pokey
++chip to play tunes and sounds.
+--- sap.src/sapLib.h.linux	Thu Sep 16 01:04:18 1999
++++ sap.src/sapLib.h	Sun May 25 23:31:39 2003
+@@ -1,3 +1,14 @@
++#ifndef ___libsap154___
++#define ___libsap154___
++
++#define LIBSAP_INFO "SAP Library ver.1.54 by Adam Bienias"
++#define LIBSAP_PORT_INFO "Linux port ver.1.54.1 by Dominik Mierzejewski"
++
++#define SILENCE_WORD 0x8001
++
++#ifdef __cplusplus
++extern "C" {
++#endif
+ 
+ #ifdef _MSC_EXTENSIONS
+ #pragma pack(push)
+@@ -8,6 +19,7 @@
+ 	int		defSong; // zero based index (0....numOfSongs-1)
+ 	char	*commentBuffer;
+ } sapMUSICstrc;
++
+ #ifdef _MSC_EXTENSIONS
+ #pragma pack(pop)
+ #endif
+@@ -16,7 +28,9 @@
+ void sapPlaySong( int numOfSong );
+ void sapRenderBuffer( signed short *buffer, int number_of_samples );
+ 
+-
++#ifdef __cplusplus
++}
++#endif
+ 
+ // don't delete sapMUSICstrc returned via sapLoadMusicFile!!!
+ // don't modify or delete commentBuffer pointed by this structure!!!
+@@ -40,9 +54,10 @@
+ // if( key==next_song )
+ // {
+ //     currentSong = (currentSong+1) % currentFile->numOfSongs;
+-//     sapPlaySong( current_song );
++//     sapPlaySong( currentSong );
+ //     goto again;
+ // }
+ // No data need to be deleted, bcoz SAP is using only static data
+ // and is able to play only one song at time
+ 
++#endif

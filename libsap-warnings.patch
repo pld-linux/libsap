@@ -1,0 +1,15 @@
+--- sap.src/sapGlobals.h.warn	Sun Oct 14 23:13:46 2001
++++ sap.src/sapGlobals.h	Mon Jul 22 00:06:22 2002
+@@ -88,8 +88,12 @@
+ axeEXTERN BYTE doWrite;
+ 
+ 
++#ifdef _MSC_EXTENSIONS
+ #pragma pack(push)
+ #pragma pack(1)
++#else
++#pragma pack(push,1)
++#endif
+ axeEXTERN union {
+ 	struct {
+ 		BYTE opcode;
