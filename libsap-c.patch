@@ -1,0 +1,14 @@
+--- sap.src/sapEngine.cpp.orig	2001-10-15 21:39:02.000000000 +0200
++++ sap.src/sapEngine.cpp	2006-10-29 14:03:13.189909750 +0100
+@@ -20,9 +20,11 @@
+ #pragma pack(pop)
+ #endif
+ 
++extern "C" {
+ sapMUSICstrc *sapLoadMusicFile( char *fname );
+ void sapPlaySong( int numOfSong );
+ void sapRenderBuffer( short int *buffer, int number_of_samples );
++}
+ 
+ namespace _SAP_internals_ {
+ 
