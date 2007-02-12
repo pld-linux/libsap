@@ -1,5 +1,5 @@
 Summary:	Emulation library of CPU 6502 and Pokey chip used in Atari XL/XE
-Summary(pl):	Biblioteka emulacji procesora 6502 i uk≥adu Pokey z Atari XL/XE
+Summary(pl.UTF-8):   Biblioteka emulacji procesora 6502 i uk≈Çadu Pokey z Atari XL/XE
 Name:		libsap
 Version:	1.54.1
 Release:	1
@@ -24,16 +24,16 @@ Pokey chip. Those two chips are used in Atari XL/XE computers. SAP
 Library is used to to run programs written in 6502 machine language,
 programs that are using Pokey chip to play tunes and sounds.
 
-%description -l pl
-Biblioteka SAP to programowa emulacja procesora 6502 oraz uk≥adu
-Pokey. Te dwa uk≥ady by≥y uøywane w komputerach Atari XL/XE.
-Biblioteka SAP s≥uøy do uruchamiania napisanych w jÍzyku maszynowym
-6502 programÛw, ktÛre uøywaj± uk≥adu Pokey do odtwarzania muzyki i
-dºwiÍkÛw.
+%description -l pl.UTF-8
+Biblioteka SAP to programowa emulacja procesora 6502 oraz uk≈Çadu
+Pokey. Te dwa uk≈Çady by≈Çy u≈ºywane w komputerach Atari XL/XE.
+Biblioteka SAP s≈Çu≈ºy do uruchamiania napisanych w jƒôzyku maszynowym
+6502 program√≥w, kt√≥re u≈ºywajƒÖ uk≈Çadu Pokey do odtwarzania muzyki i
+d≈∫wiƒôk√≥w.
 
 %package devel
 Summary:	Header files for libsap
-Summary(pl):	Pliki nag≥Ûwkowe libsap
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe libsap
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -41,19 +41,19 @@ Requires:	libstdc++-devel
 %description devel
 Header files for libsap.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe libsap.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe libsap.
 
 %package static
 Summary:	Static libsap library
-Summary(pl):	Statyczna biblioteka libsap
+Summary(pl.UTF-8):   Statyczna biblioteka libsap
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libsap library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka libsap.
 
 %prep
