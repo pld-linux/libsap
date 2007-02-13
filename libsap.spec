@@ -1,5 +1,5 @@
 Summary:	Emulation library of CPU 6502 and Pokey chip used in Atari XL/XE
-Summary(pl.UTF-8):   Biblioteka emulacji procesora 6502 i układu Pokey z Atari XL/XE
+Summary(pl.UTF-8):	Biblioteka emulacji procesora 6502 i układu Pokey z Atari XL/XE
 Name:		libsap
 Version:	1.54.1
 Release:	1
@@ -33,7 +33,7 @@ dźwięków.
 
 %package devel
 Summary:	Header files for libsap
-Summary(pl.UTF-8):   Pliki nagłówkowe libsap
+Summary(pl.UTF-8):	Pliki nagłówkowe libsap
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -46,7 +46,7 @@ Pliki nagłówkowe libsap.
 
 %package static
 Summary:	Static libsap library
-Summary(pl.UTF-8):   Statyczna biblioteka libsap
+Summary(pl.UTF-8):	Statyczna biblioteka libsap
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
