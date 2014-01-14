@@ -1,0 +1,11 @@
+--- sap.src/sapGlobals.h.orig	2014-01-14 21:32:36.485670266 +0100
++++ sap.src/sapGlobals.h	2014-01-14 21:33:43.630041968 +0100
+@@ -94,7 +94,7 @@ axeEXTERN BYTE doWrite;
+ #else
+ #pragma pack(push,1)
+ #endif
+-axeEXTERN union {
++axeEXTERN union dword_u_union {
+ 	struct {
+ 		BYTE opcode;
+ 		BYTE vb1;
